@@ -3,7 +3,7 @@ name = "solana-mev-bot"
 version = "0.1.0"
 edition = "2021"
 description = "A Solana MEV bot"
-repository = "https://github.com/i3visio/solana-mev-bot"
+repository = "https://github.com/sn-chr/solana-mev-bot"
 license = "MIT"
 
 [[bin]]

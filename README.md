@@ -1,17 +1,17 @@
 
 # Solana MEV Bot
 
-A high-performance, flash-loan-integrated MEV (Maximal Extractable Value)  https://t.me/i3visio arbitrage bot for the Solana blockchain. This Rust-based solution is engineered to identify and execute profitable arbitrage opportunities across a wide range of decentralized exchanges (DEXs).
+A high-performance, flash-loan-integrated MEV (Maximal Extractable Value) arbitrage bot for the Solana blockchain. This Rust-based solution is engineered to identify and execute profitable arbitrage opportunities across a wide range of decentralized exchanges (DEXs).
 
 ## Contact Information
 
-- **Discord**: [@i3visio](https://discord.gg/8Zu7W8pS)
-- **Telegram**: [@i3visio](https://t.me/i3visio)
-- **Email**: [i3visio89@gmail.com](mailto:i3visio89@gmail.com)
+- **Discord**: [@wbts416](https://discord.gg/8Zu7W8pS)
+- **Telegram**: [@wb_ts2](https://t.me/wb_ts2)
+- **Email**: [wb.ts416@gmail.com](mailto:wb.ts416@gmail.com)
 
 ## Overview
 
-The Solana Arbitrage Bot (https://t.me/i3visio) is a sophisticated framework designed for executing complex arbitrage strategies on the Solana network. It operates by monitoring price discrepancies of token pairs across various DEXs and executing atomic, multi-leg trades to capitalize on these differences. The integration of flash loans from Kamino Finance allows the bot to leverage significant capital, maximizing profitability without requiring large upfront investments.
+The Solana Arbitrage Bot is a sophisticated framework designed for executing complex arbitrage strategies on the Solana network. It operates by monitoring price discrepancies of token pairs across various DEXs and executing atomic, multi-leg trades to capitalize on these differences. The integration of flash loans from Kamino Finance allows the bot to leverage significant capital, maximizing profitability without requiring large upfront investments.
 
 This tool is intended for experienced developers and quantitative traders with a strong understanding of blockchain, DeFi, and MEV.
 
@@ -187,7 +187,7 @@ A practical approach to implementing this workflow would be:
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/i3visio/solana-mev-bot.git
+    git clone https://github.com/sn-chr/solana-mev-bot.git
     cd solana-mev-bot
     ```
 
@@ -254,6 +254,6 @@ This is an array of tables, where each table configures the arbitrage route for 
 
 ## Contact Information
 
-- **Discord**: [@i3visio](https://discord.gg/8Zu7W8pS)
-- **Telegram**: [@i3visio](https://t.me/i3visio)
-- **Email**: [i3visio89@gmail.com](mailto:i3visio89@gmail.com)
+- **Discord**: [@wbts416](https://discord.gg/8Zu7W8pS)
+- **Telegram**: [@wb_ts2](https://t.me/wb_ts2)
+- **Email**: [wb.ts416@gmail.com](mailto:wb.ts416@gmail.com)
