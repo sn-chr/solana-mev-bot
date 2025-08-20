@@ -5,7 +5,7 @@ A high-performance, flash-loan-integrated MEV (Maximal Extractable Value) arbitr
 
 ## Contact Information
 
-- **Discord**: [@wbts416](https://discord.gg/8Zu7W8pS)
+- **Discord**: @wbts416
 - **Telegram**: [@wb_ts2](https://t.me/wb_ts2)
 - **Email**: [wb.ts416@gmail.com](mailto:wb.ts416@gmail.com)
 
@@ -254,6 +254,6 @@ This is an array of tables, where each table configures the arbitrage route for 
 
 ## Contact Information
 
-- **Discord**: [@wbts416](https://discord.gg/8Zu7W8pS)
+- **Discord**: @wbts416
 - **Telegram**: [@wb_ts2](https://t.me/wb_ts2)
 - **Email**: [wb.ts416@gmail.com](mailto:wb.ts416@gmail.com)
