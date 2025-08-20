@@ -1,6 +1,8 @@
 
 # Solana MEV Bot
 
+> A high-performance, flash-loan-integrated MEV arbitrage bot for Solana blockchain. Built in Rust with support for multiple DEXs including Raydium, Meteora, Orca, and more. Features atomic multi-leg trades, Kamino flash loans, and advanced transaction optimization.
+
 A high-performance, flash-loan-integrated MEV (Maximal Extractable Value) arbitrage bot for the Solana blockchain. This Rust-based solution is engineered to identify and execute profitable arbitrage opportunities across a wide range of decentralized exchanges (DEXs).
 
 ## Contact Information
