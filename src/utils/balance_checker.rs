@@ -5,7 +5,7 @@ use solana_sdk::{
     instruction::Instruction,
     message::Message,
     pubkey::Pubkey,
-    signature::Signature,
+    signature::{Signature, Signer, EncodableKey},
     system_instruction,
     transaction::Transaction,
 };

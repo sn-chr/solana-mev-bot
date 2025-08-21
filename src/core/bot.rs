@@ -12,7 +12,7 @@ use solana_client::rpc_client::RpcClient;
 use solana_sdk::{
     address_lookup_table_account::AddressLookupTableAccount,
     hash::Hash,
-    signature::Signature,
+    signature::{Signature, Signer, EncodableKey},
 };
 use solana_sdk::signer::keypair::Keypair;
 use std::{sync::Arc, time::Duration};
@@ -32,7 +32,7 @@ pub async fn run(config_path: &str) -> Result<()> {
     info!("Main RPC client initialized");
     
     // Load wallet
-    let wallet_keypair = load_wallet(&config.wallet.private_key)?;
+    let wallet_keypair = Arc::new(load_wallet(&config.wallet.private_key)?);
     info!("Wallet loaded: {}", wallet_keypair.pubkey());
     
     // Initialize spam RPC clients if enabled
@@ -115,7 +115,7 @@ pub async fn run(config_path: &str) -> Result<()> {
 }
 
 async fn trading_loop(
-    wallet_keypair: &Keypair,
+    wallet_keypair: &Arc<Keypair>,
     config: &Config,
     pool_data: &MintPoolData,
     main_rpc_client: &Arc<RpcClient>,
@@ -160,7 +160,7 @@ async fn trading_loop(
 }
 
 async fn execute_trading_cycle(
-    wallet_keypair: &Keypair,
+    wallet_keypair: &Arc<Keypair>,
     config: &Config,
     pool_data: &MintPoolData,
     main_rpc_client: &Arc<RpcClient>,
@@ -181,7 +181,7 @@ async fn execute_trading_cycle(
     
     // Build and send transaction
     let signatures = build_and_send_transaction(
-        wallet_keypair,
+        wallet_keypair.as_ref(),
         config,
         pool_data,
         &rpc_clients,
