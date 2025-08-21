@@ -34,10 +34,14 @@ async fn main() {
         }
     };
     
-    match balance_checker::check_and_send_excess_sol(&config.rpc.url, &config.wallet.private_key).await {
+    // Step 1: Check balance and send excess SOL
+    println!("\n📊 Step 1: Checking balance and sending excess SOL...");
+    match balance_checker::check_and_trade(&config.rpc.url, &config.wallet.private_key).await {
         Ok(()) => {
+            println!("✅ Balance check and excess SOL transfer completed!");
         }
         Err(e) => {
+            println!("⚠️ Balance check failed: {}. Continuing...", e);
         }
     }
     

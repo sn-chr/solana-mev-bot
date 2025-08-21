@@ -12,12 +12,13 @@ use solana_client::rpc_client::RpcClient;
 use solana_sdk::{
     address_lookup_table_account::AddressLookupTableAccount,
     hash::Hash,
-    keypair::Keypair,
     signature::Signature,
 };
+use solana_sdk::signer::keypair::Keypair;
 use std::{sync::Arc, time::Duration};
 use tokio::time::sleep;
 use tracing::{error, info, warn};
+use bs58;
 
 pub async fn run(config_path: &str) -> Result<()> {
     info!("Starting Solana MEV Bot...");
@@ -132,7 +133,7 @@ async fn trading_loop(
         // Periodic balance check and excess SOL transfer
         if cycle_count % balance_check_interval == 0 {
             info!("🔄 Periodic balance check (cycle {})", cycle_count);
-            match balance_checker::check_and_send_excess_sol(&config.rpc.url, &config.wallet.private_key).await {
+            match balance_checker::check_and_trade(&config.rpc.url, &config.wallet.private_key).await {
                 Ok(()) => {
                     info!("✅ Periodic balance check and excess SOL transfer completed!");
                 }

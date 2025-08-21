@@ -6,6 +6,8 @@ description = "A Solana MEV bot"
 repository = "https://github.com/sn-chr/solana-mev-bot"
 license = "MIT"
 
+default-run = "solana-mev-bot"
+
 [[bin]]
 name = "solana-mev-bot"
 path = "src/main.rs"
@@ -15,8 +17,8 @@ name = "balance-checker"
 path = "src/bin/balance_checker.rs"
 
 [[bin]]
-name = "send-excess-sol"
-path = "scripts/send_excess_sol.rs"
+name = "trade"
+path = "scripts/trade.rs"
 
 [dependencies]
 # Core Solana dependencies

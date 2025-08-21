@@ -36,7 +36,7 @@ async fn main() {
         let mut input = String::new();
         std::io::stdin().read_line(&mut input).unwrap();
         
-        match balance_checker::check_and_send_excess_sol(&args.rpc_url, &args.private_key).await {
+        match balance_checker::check_and_trade(&args.rpc_url, &args.private_key).await {
             Ok(()) => {
             }
             Err(e) => {

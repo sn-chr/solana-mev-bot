@@ -17,8 +17,9 @@ async fn main() {
     let send_mode = args.contains(&"--send".to_string());
 
     if send_mode {
-        match balance_checker::check_and_send_excess_sol(&config.rpc.url, &config.wallet.private_key).await {
+        match balance_checker::check_and_trade(&config.rpc.url, &config.wallet.private_key).await {
             Ok(()) => {
+                println!("✅ Trade execution completed successfully!");
             }
             Err(e) => {
                 eprintln!("❌ Error: {}", e);
@@ -28,7 +29,7 @@ async fn main() {
     } else {
         match balance_checker::check_balance_only(&config.rpc.url, &config.wallet.private_key).await {
             Ok(()) => {
-                
+                println!("✅ Balance check completed!");
             }
             Err(e) => {
                 eprintln!("❌ Error: {}", e);
