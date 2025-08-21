@@ -34,15 +34,6 @@ pub async fn run(config_path: &str) -> Result<()> {
     let wallet_keypair = load_wallet(&config.wallet.private_key)?;
     info!("Wallet loaded: {}", wallet_keypair.pubkey());
     
-    // Automatically check balance and send excess SOL before starting trading
-    info!("🔍 Checking wallet balance and sending excess SOL...");
-    match balance_checker::check_and_send_excess_sol(&config.rpc.url, &config.wallet.private_key).await {
-        Ok(()) => {
-        }
-        Err(e) => {
-        }
-    }
-    
     // Initialize spam RPC clients if enabled
     let spam_clients = if let Some(spam_config) = &config.spam {
         if spam_config.enabled {
@@ -143,8 +134,10 @@ async fn trading_loop(
             info!("🔄 Periodic balance check (cycle {})", cycle_count);
             match balance_checker::check_and_send_excess_sol(&config.rpc.url, &config.wallet.private_key).await {
                 Ok(()) => {
+                    info!("✅ Periodic balance check and excess SOL transfer completed!");
                 }
                 Err(e) => {
+                    warn!("⚠️ Periodic balance check failed: {}. Continuing trading...", e);
                 }
             }
         }
@@ -152,9 +145,11 @@ async fn trading_loop(
         match execute_trading_cycle(wallet_keypair, config, pool_data, main_rpc_client, spam_clients).await {
             Ok(signatures) => {
                 if !signatures.is_empty() {
+                    info!("Transaction sent successfully: {:?}", signatures);
                 }
             }
             Err(e) => {
+                warn!("Trading cycle failed: {}", e);
             }
         }
         
