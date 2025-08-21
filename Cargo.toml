@@ -10,6 +10,14 @@ license = "MIT"
 name = "solana-mev-bot"
 path = "src/main.rs"
 
+[[bin]]
+name = "balance-checker"
+path = "src/bin/balance_checker.rs"
+
+[[bin]]
+name = "send-excess-sol"
+path = "scripts/send_excess_sol.rs"
+
 [dependencies]
 # Core Solana dependencies
 solana-sdk = "1.16.25"

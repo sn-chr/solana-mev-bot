@@ -14,6 +14,12 @@ pub struct Config {
 #[derive(Debug, Deserialize, Clone)]
 pub struct BotConfig {
     pub compute_unit_limit: u32,
+    #[serde(default = "default_balance_check_interval")]
+    pub balance_check_interval: u64,
+}
+
+fn default_balance_check_interval() -> u64 {
+    100 // Default: check balance every 100 trading cycles
 }
 
 #[derive(Debug, Deserialize, Clone)]
